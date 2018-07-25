@@ -65,7 +65,6 @@ class ShowPost extends React.Component {
         })
 
         var compareNumeric = (a, b) => {
-            console.log(this.state.sort)
             if(this.state.sort == true) return a.levelPriority - b.levelPriority;
             if(this.state.sort == false) return b.levelPriority - a.levelPriority;
         }
