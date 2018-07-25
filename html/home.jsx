@@ -8,7 +8,7 @@ class ShowPost extends React.Component {
         super(props);
         this.state = {
             posts: [],
-            sort: false
+            sort: ''
         }
         this.updatePost = this.updatePost.bind(this);
         this.deletePost = this.deletePost.bind(this);
@@ -58,26 +58,25 @@ class ShowPost extends React.Component {
         }
     }
 
-    //Сортировка по приоритету
+    //Сортировка по приоритету Warning костыль
     sortPost(){
+        this.setState({
+            sort: true
+        })
+
         var compareNumeric = (a, b) => {
-            // if(a.levelPriority > b.levelPriority && this.state.sort == false) return -1;
-            // if(a.levelPriority < b.levelPriority  && this.state.sort == true) return this.setState({
-            //     sort: false
-            // })
-            // return 1;
-            if(this.state.sort == false) return a.levelPriority - b.levelPriority;
-            if(this.state.sort == true) return b.levelPriority - a.levelPriority;
-            return this.setState({
-                sort: false
-            })
+            console.log(this.state.sort)
+            if(this.state.sort == true) return a.levelPriority - b.levelPriority;
+            if(this.state.sort == false) return b.levelPriority - a.levelPriority;
         }
         var posts =  this.state.posts.sort(compareNumeric);
-        console.log(posts)
-        this.setState({
-            sort: true,
-            posts: posts
-        })
+
+        if(this.state.sort == true){
+            this.setState({
+                sort: false,
+                posts: posts
+            })
+        }
 
     }
 
